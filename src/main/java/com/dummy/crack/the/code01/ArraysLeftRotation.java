@@ -72,15 +72,19 @@ import java.util.regex.*;
  * Thus, we print the array's final state as a single line of space-separated values, which is <b>5
  * 1 2 3 4</b>.
  * </p>
+ * 
+ * @author tugrul.ocak
  */
 
 public class ArraysLeftRotation {
 
   public static int[] arrayLeftRotation(int[] a, int n, int k) {
-    
-    return a;
+    int[] tmp = new int[n];
+    System.arraycopy(a, k, tmp, 0, n-k);
+    System.arraycopy(a, 0, tmp, n-k, k);
+    return tmp;
   }
-
+  
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
     int n = in.nextInt();

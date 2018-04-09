@@ -36,37 +36,22 @@ import java.util.regex.*;
  * <p>We must delete <b>4</b> characters to make both strings anagrams, so we print <b>4</b> on a new line.</p>
  * @author tugrul.ocak
  */
-public class StringsMakingAnagrams {
+public class StringsMakingAnagramsFromGLMD {
 
-  public static int NUMBER_LETTERS = 26;
-  
-  public static int getDelta(int[] array1, int[] array2) {
-    if(array1.length != array2.length) {
-      return -1;
-    }
-    int delta = 0;
-    for(int i=0; i < array1.length; i++) {
-      int difference = Math.abs(array1[i] - array2[i]);
-      delta += difference;
-    }
-    return delta;
-  }
-  
-  public static int[] getCharCounts(String s) {
-    int[] charCounts = new int[NUMBER_LETTERS];
-    for(int i=0; i < s.length(); i++) {
-      char c = s.charAt(i);
-      int offset = (int) 'a';
-      int code = c - offset;
-      charCounts[code]++;
-    }
-    return charCounts;
-  }
-  
   public static int numberNeeded(String first, String second) {
-    int[] charCount1 = getCharCounts(first);
-    int[] charCount2 = getCharCounts(second);
-    return getDelta(charCount1, charCount2);
+    int[] letterCounts = new int[26];
+    for(char f : first.toCharArray()) {
+      letterCounts[f - 'a']++;
+    }
+    for(char s : second.toCharArray()) {
+      letterCounts[s - 'a']--;
+    }
+    
+    int result = 0;
+    for(int i : letterCounts) {
+      result += Math.abs(i);
+    }
+    return result;
   }
 
   public static void main(String[] args) {
